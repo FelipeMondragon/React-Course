@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import ContenidoDinamico from "./contenidoDinamico";
 import EjemploReloj from "./EjemploReloj";
 import MostrarTexto from "./MostrarTexto";
-import ProyectarContenido2 from "./ProyectarContenido2";
 
 function App() {
   const [texto, setTexto] = useState("Felipe");
@@ -32,11 +32,8 @@ function App() {
     <>
       <h1 className="rojo">Hola mundo!</h1>
 
-      <ProyectarContenido2
-        parteSuperior={<span>Este es un mensaje del componente padre</span>}
-        parteIntermedia={parteIntermedia}
-        parteInferior={parteInferior}
-      />
+      <ContenidoDinamico calificacion={65} />
+
       <button
         onMouseEnter={() => console.log("entrando")}
         onClick={() => console.log("click desde el botón")}
