@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Abuelo from "./Abuelo";
 import "./App.css";
 import EjemploUseEffect from "./EjemploUseEffect";
 import FormularioTexto from "./FormularioTexto";
@@ -39,7 +40,9 @@ function App() {
     <>
       <h1 className="rojo">Hola mundo!</h1>
 
-      <ValorContext.Provider value={texto}></ValorContext.Provider>
+      <ValorContext.Provider value={texto}>
+        <Abuelo />
+      </ValorContext.Provider>
 
       <div>
         <input
