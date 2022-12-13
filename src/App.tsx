@@ -1,38 +1,60 @@
 import React, { useState } from "react";
 import "./App.css";
-import ContenidoDinamico from "./contenidoDinamico";
-import EjemploReloj from "./EjemploReloj";
+import EjemploUseEffect from "./EjemploUseEffect";
+import FormularioTexto from "./FormularioTexto";
 import MostrarTexto from "./MostrarTexto";
+import ValorContext from "./ValorContext";
 
 function App() {
   const [texto, setTexto] = useState("Felipe");
-  const [checked, setChecked] = useState(false);
-  const imagenURL =
-    "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg";
+  const [checked, setChecked] = useState(true);
+  // const imagenURL =
+  //   "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg";
 
-  const manejarClick = () => console.log("click");
+  // const manejarClick = () => console.log("click");
 
-  const manejarKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
-    setTexto(e.currentTarget.value);
+  const manejarKeyUp = (textoInput: string) => {
+    console.log(textoInput);
+    setTexto(textoInput);
   };
 
-  const parteIntermedia = <EjemploReloj />;
+  // const parteIntermedia = <EjemploReloj />;
 
-  const estilo = {
-    backgroundColor: "red",
-    width: "50px",
-    height: "50px",
-    marginLeft: "1rem",
-  };
+  // const estilo = {
+  //   backgroundColor: "red",
+  //   width: "50px",
+  //   height: "50px",
+  //   marginLeft: "1rem",
+  // };
 
-  const parteInferior = <div style={estilo}> </div>;
+  // const parteInferior = <div style={estilo}> </div>;
+
+  // const calificaciones = [
+  //   { nombre: "Felipe", calificacion: 75 },
+  //   { nombre: "Claudia", calificacion: 85 },
+  //   { nombre: "Roberto", calificacion: 95 },
+  // ];
 
   return (
     <>
       <h1 className="rojo">Hola mundo!</h1>
 
-      <ContenidoDinamico calificacion={65} />
+      <ValorContext.Provider value={texto}></ValorContext.Provider>
+
+      <div>
+        <input
+          type="checkbox"
+          onChange={(e) => setChecked(e.currentTarget.checked)}
+          checked={checked}
+        />{" "}
+        Mostrar componente useEffect
+      </div>
+
+      {checked ? <EjemploUseEffect /> : null}
+
+      {/* {calificaciones.map((cal) => (
+        <ContenidoDinamico key={cal.nombre} {...cal} />
+      ))} */}
 
       <button
         onMouseEnter={() => console.log("entrando")}
@@ -42,19 +64,10 @@ function App() {
       </button>
       <br />
       <br />
-      <input type="text" onKeyUp={(e) => manejarKeyUp(e)} />
+      <FormularioTexto manejarKeyUp={(e: string) => manejarKeyUp(e)} />
       <MostrarTexto texto={texto} />
       <br />
       <br />
-
-      <div>
-        <input
-          type="checkbox"
-          onChange={(e) => setChecked(e.currentTarget.checked)}
-          checked={checked}
-        />{" "}
-        Este es un checkbox
-      </div>
     </>
   );
 }
