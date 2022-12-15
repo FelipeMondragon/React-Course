@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Abuelo from "./Abuelo";
 import "./App.css";
+import ContenidoDinamico from "./contenidoDinamico";
 import EjemploUseEffect from "./EjemploUseEffect";
+import ErrorBoundary from "./ErrorBoundary";
 import FormularioTexto from "./FormularioTexto";
 import MostrarTexto from "./MostrarTexto";
 import ValorContext from "./ValorContext";
@@ -30,17 +32,23 @@ function App() {
 
   // const parteInferior = <div style={estilo}> </div>;
 
-  // const calificaciones = [
-  //   { nombre: "Felipe", calificacion: 75 },
-  //   { nombre: "Claudia", calificacion: 85 },
-  //   { nombre: "Roberto", calificacion: 95 },
-  // ];
+  const calificaciones = [
+    { nombre: "Felipe", calificacion: 75 },
+    { nombre: "Claudia", calificacion: -1 },
+    { nombre: "Roberto", calificacion: 95 },
+  ];
 
   return (
     <>
       <h1 className="rojo">Hola mundo!</h1>
 
-      <ValorContext.Provider value={texto}>
+      {calificaciones.map((cal) => (
+        <ErrorBoundary key={cal.nombre}>
+          <ContenidoDinamico {...cal} />
+        </ErrorBoundary>
+      ))}
+
+      {/* <ValorContext.Provider value={texto}>
         <Abuelo />
       </ValorContext.Provider>
 
@@ -53,11 +61,7 @@ function App() {
         Mostrar componente useEffect
       </div>
 
-      {checked ? <EjemploUseEffect /> : null}
-
-      {/* {calificaciones.map((cal) => (
-        <ContenidoDinamico key={cal.nombre} {...cal} />
-      ))} */}
+      {checked ? <EjemploUseEffect /> : null} */}
 
       <button
         onMouseEnter={() => console.log("entrando")}
